@@ -17,8 +17,8 @@ public class BaseTest {
     @BeforeMethod
     public void initDriver(){
         ChromeOptions chromeOptions = new ChromeOptions();
-//        chromeOptions.addArguments("--headless=new");
-//        chromeOptions.addArguments("--window-size=1920,1080");
+        chromeOptions.addArguments("--headless=new");
+        chromeOptions.addArguments("--window-size=1920,1080");
 
         WebDriver driverInstance = new ChromeDriver(chromeOptions);
         driverInstance.manage().window().maximize();
