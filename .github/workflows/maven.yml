@@ -26,3 +26,9 @@ jobs:
         cache: maven
     - name: run the automation framework
       run: mvn clean test -Dsuite=testng.xml
+
+    - name: upload extent reports
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: extent-report
+        path: target/reports/extent-report.html
