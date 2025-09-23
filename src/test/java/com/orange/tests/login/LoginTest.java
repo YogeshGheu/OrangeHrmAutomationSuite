@@ -5,6 +5,7 @@ import com.orange.pages.application.login.LoginPage;
 import com.orange.tests.base.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
@@ -15,7 +16,6 @@ public class LoginTest extends BaseTest {
     @Test(description = "test login functionality with valid credentials")
     public void testLoginWithValidCredentials(){
         WebDriver driver = getDriver();
-        System.out.println(username + password);
         LoginPage loginPage = new LoginPage(driver);
         DashboardPage dashboardPage = loginPage.loginToApp(username, password);
         Assert.assertTrue(dashboardPage.isDashboardHeadingVisible());
