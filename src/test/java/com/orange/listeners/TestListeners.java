@@ -12,8 +12,8 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class TestListeners implements ITestListener {
@@ -48,15 +48,19 @@ public class TestListeners implements ITestListener {
     public void onFinish(ITestContext context) {
         reports.flush();
         Properties properties = new Properties();
-        try{
-            properties.load(new FileInputStream("src/test/resources/config/config.properties"));
-            String [] recipients = properties.getProperty("recipients").split(",");
-            EmailUtility.sendEmailWithAttachment(
-                    recipients,
-                    "test execution report - orange HRM",
-                    "Please find the attached test execution report",
-                    "target/reports/extent-report.html");
-        }catch (Exception e){
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream("config/config.properties")){
+        if (input == null) {
+            System.out.println("unable to find config.properties");
+            return;
+        }
+        properties.load(input);
+        String[] recipients = properties.getProperty("recipients").split(",");
+        EmailUtility.sendEmailWithAttachment(
+                recipients,
+                "test execution report - orange HRM",
+                "Please find the attached test execution report",
+                "target/reports/extent-report.html");
+    }catch (Exception e){
             System.out.println("Error while sending the email: " + e.getMessage());
         }
     }
