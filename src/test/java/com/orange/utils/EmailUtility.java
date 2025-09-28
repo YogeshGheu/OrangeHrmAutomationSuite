@@ -11,8 +11,8 @@ import java.util.Properties;
 public class EmailUtility {
 
     public static void sendEmailWithAttachment(String[] toEmails, String subject, String body, String attachmentPath) {
-        String fromEmail = System.getenv("email");
-        String password = System.getenv("email_pass");
+        String fromEmail = System.getenv("EMAIL");
+        String password = System.getenv("EMAIL_PASS");
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
