@@ -1,16 +1,20 @@
 package com.orange.listeners;
 
 import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.orange.reporters.ExtentReportManager;
 import com.orange.tests.base.BaseTest;
+import com.orange.utils.EmailUtility;
 import com.orange.utils.ScreenshotUtility;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.Properties;
 
 public class TestListeners implements ITestListener {
     ExtentReports reports;
@@ -43,5 +47,17 @@ public class TestListeners implements ITestListener {
 
     public void onFinish(ITestContext context) {
         reports.flush();
+        Properties properties = new Properties();
+        try{
+            properties.load(new FileInputStream("src/test/resources/config/config.properties"));
+            String [] recipients = properties.getProperty("recipients").split(",");
+            EmailUtility.sendEmailWithAttachment(
+                    recipients,
+                    "test execution report - orange HRM",
+                    "Please find the attached test execution report",
+                    "target/reports/extent-report.html");
+        }catch (Exception e){
+            System.out.println("Error while sending the email: " + e.getMessage());
+        }
     }
 }
