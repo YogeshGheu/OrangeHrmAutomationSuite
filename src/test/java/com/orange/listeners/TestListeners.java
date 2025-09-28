@@ -8,6 +8,7 @@ import com.orange.tests.base.BaseTest;
 import com.orange.utils.EmailUtility;
 import com.orange.utils.ScreenshotUtility;
 import org.openqa.selenium.WebDriver;
+import org.testng.IRetryAnalyzer;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;

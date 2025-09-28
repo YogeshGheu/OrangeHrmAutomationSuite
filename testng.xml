@@ -3,6 +3,7 @@
 <suite name="All Test Suite" parallel="methods" thread-count="4">
     <listeners>
         <listener class-name="com.orange.listeners.TestListeners"/>
+        <listener class-name="com.orange.listeners.RetryTestListener"/>
     </listeners>
     <test verbose="2" preserve-order="true" name="/Users/yogeshgheu/Documents/Testing/OrangeHrmAutomationSuite">
         <classes>
