@@ -16,7 +16,7 @@ jobs:
       ORANGEHRM_USER: ${{ secrets.ORANGEHRM_USER }}
       ORANGEHRM_PASSWORD: ${{ secrets.ORANGEHRM_PASSWORD }}
       EMAIL: ${{secrets.EMAIL}}
-      EMAIL_PASS: ${{EMAIL_PASS}}
+      EMAIL_PASS: ${{secrets.EMAIL_PASS}}
 
     steps:
     - uses: actions/checkout@v4
